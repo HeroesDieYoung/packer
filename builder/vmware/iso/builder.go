@@ -363,9 +363,7 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 	// Compile the artifact list
 	var files []string
 	if b.config.RemoteType != "" && b.config.Format != "" {
-		dir = new(vmwcommon.LocalOutputDir)
-		dir.SetOutputDir(b.config.OutputDir)
-		files, err = dir.ListFiles()
+		files, err = state.Get("export_path").(OutputDir).ListFiles()
 	} else {
 		files, err = state.Get("dir").(OutputDir).ListFiles()
 	}

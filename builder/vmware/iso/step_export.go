@@ -18,7 +18,7 @@ type StepExport struct {
 }
 
 func (s *StepExport) Run(state multistep.StateBag) multistep.StepAction {
-	c := state.Get("config").(*config)
+	c := state.Get("config").(*Config)
 	ui := state.Get("ui").(packer.Ui)
 
 	if c.RemoteType != "esx5" || s.Format == "" {
@@ -66,7 +66,7 @@ func (s *StepExport) Run(state multistep.StateBag) multistep.StepAction {
 
 	ui.Message(fmt.Sprintf("%s", out.String()))
 
-	state.Put("exportPath", outputPath)
+	state.Put("export_path", outputPath)
 
 	return multistep.ActionContinue
 }
